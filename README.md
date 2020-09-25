@@ -8,7 +8,7 @@ I already found two other teammates. But I would like to know if you like my pro
 Not specified
 
 ## NoSQL
-Not specified
+Not specified (But maybe key-value noSQL?)
 
 ## Business
 This is a free application for everyone to use. People should register as users to enjoy exclusive features (such as personal recommendations, saved recipes, etc.)
