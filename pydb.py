@@ -32,7 +32,7 @@ def create_table(conn, create_table_sql):
 
 
 def main():
-    database = r"C:\Users\tmdtm\Desktop\pythonsqlite.db"
+    database = r"\yummy.db"
 
     sql_create_Recipe_table = """CREATE TABLE IF NOT EXISTS Recipe (
                                     RecipeID int NOT NULL,

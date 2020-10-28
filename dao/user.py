@@ -20,12 +20,13 @@ def create_table():
     c.commit()
     c.close()
 
-def add_user(conn, user):
+def add_user(user):
+    c = create_connection('yummy.db')
+
     sql = ''' INSERT INTO User(UserID,Username,Password,Email)
               VALUES(?,?,?,?,?,?) '''
 
-    cur = conn.cursor()
-    cur.execute(sql, user)
-    conn.commit()
+    c.execute(sql, user)
+    c.commit()
+    c.close()
 
-    return cur.lastrowid
