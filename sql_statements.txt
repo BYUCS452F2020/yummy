@@ -20,3 +20,11 @@ CREATE TABLE Ingredient (
 	PRIMARY KEY (RecipeID, Name),
 	FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID)	
 )
+
+CREATE TABLE User (
+	UserID int NOT NULL,
+	Username varchar(255),
+	Password varchar(255),
+	Email varchar(255),
+	PRIMARY KEY (RecipeID)
+)
