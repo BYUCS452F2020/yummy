@@ -16,7 +16,7 @@ def create_table():
 
     c = create_connection('yummy.db')
 
-    c.execute('')
+    c.execute()
     c.commit()
     c.close()
 
