@@ -11,7 +11,7 @@ CREATE TABLE Recipe (
 	PRIMARY KEY (RecipeID),
 	FOREIGN KEY (AuthorID) REFERENCES User(UserID) ON DELETE SET NULL,
 	CHECK (Difficulty BETWEEN 1 AND 5)
-)
+);
 
 CREATE TABLE Ingredient (
 	RecipeID int NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE Ingredient (
 	Amount varchar(255),
 	PRIMARY KEY (RecipeID, Name),
 	FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID) ON DELETE CASDADE	
-)
+);
 
 CREATE TABLE Procedure (
 	RecipeID int NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE Procedure (
 	Description varchar(255),
 	PRIMARY KEY (RecipeID, Procecure),
 	FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID) ON DELETE CASDADE
-)
+);
 
 CREATE TABLE User (
 	UserID int NOT NULL UNIQUE AUTO_INCREMENT,
@@ -35,7 +35,7 @@ CREATE TABLE User (
 	Password varchar(255) NOT NULL,
 	Email varchar(255),
 	PRIMARY KEY (UserID)
-)
+);
 
 CREATE TABLE Flavorite (
 	UserID int NOT NULL,
@@ -43,5 +43,5 @@ CREATE TABLE Flavorite (
 	PRIMARY KEY (UserID, RecipeID),
 	FOREIGN KEY (UserID) REFERENCES User(UserID) ON DELETE CASDADE,
 	FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID) ON DELETE CASDADE
-)
+);
 

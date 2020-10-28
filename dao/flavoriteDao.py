@@ -12,10 +12,19 @@ def create_connection(path):
 
     return connection
 
+
 def create_table():
 
     c = create_connection('yummy.db')
 
-    c.execute('')
+    sql = """CREATE TABLE Flavorite (
+                UserID int NOT NULL,
+                RecipeID int NOT NULL,
+                PRIMARY KEY (UserID, RecipeID),
+                FOREIGN KEY (UserID) REFERENCES User(UserID) ON DELETE CASDADE,
+                FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID) ON DELETE CASDADE
+            );"""
+
+    c.execute(sql)
     c.commit()
     c.close()

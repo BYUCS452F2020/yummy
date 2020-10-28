@@ -12,14 +12,30 @@ def create_connection(path):
 
     return connection
 
-def create_table(sql):
+
+def create_table():
 
     c = create_connection('yummy.db')
 
-    c.execute()
+    sql = """CREATE TABLE Recipe (
+                RecipeID int NOT NULL UNIQUE AUTO_INCREMENT,
+                AuthorID int,
+                Name varchar(255) NOT NULL,
+                Duration varchar(255),
+                Picture BLOB,
+                Difficulty int,
+                Style varchar(255),
+                Country varchar(255),
+                Course varchar(255),
+                PRIMARY KEY (RecipeID),
+                FOREIGN KEY (AuthorID) REFERENCES User(UserID) ON DELETE SET NULL,
+                CHECK (Difficulty BETWEEN 1 AND 5)
+            );"""
+
     c.execute(sql)
     c.commit()
     c.close()
+
 
 def add_recipe(recipe):
     c = create_connection('yummy.db')
@@ -32,6 +48,7 @@ def add_recipe(recipe):
     c.execute(sql, recipe)
     c.commit()
     c.close()
+
 
 def delete_recipe():
     pass

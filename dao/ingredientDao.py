@@ -12,13 +12,23 @@ def create_connection(path):
 
     return connection
 
-def create_table(sql):
+
+def create_table():
 
     c = create_connection('yummy.db')
+
+    sql = """CREATE TABLE Ingredient (
+                RecipeID int NOT NULL,
+                Name varchar(255) NOT NULL,
+                Amount varchar(255),
+                PRIMARY KEY (RecipeID, Name),
+                FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID) ON DELETE CASDADE	
+            );"""
 
     c.execute(sql)
     c.commit()
     c.close()
+
 
 def add_ingredient(ingredient):
     c = create_connection('yummy.db')
@@ -31,4 +41,3 @@ def add_ingredient(ingredient):
     c.execute(sql, ingredient)
     c.commit()
     c.close()
-    
