@@ -1,0 +1,14 @@
+CREATE TABLE Recipe (
+	RecipeID int NOT NULL,
+	AuthorID int NOT NULL,
+	Name varchar(255) NOT NULL,
+	Duration varchar(255),
+	Picture BLOB,
+	Difficulty int,
+	Style varchar(255),
+	Country varchar(255),
+	Course varchar(255),
+	PRIMARY KEY (RecipeID),
+	FOREIGN KEY (AuthorID) REFERENCES User(UserID),
+	CHECK (Difficulty BETWEEN 1 AND 5)
+)
