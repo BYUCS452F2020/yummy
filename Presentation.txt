@@ -1,0 +1,15 @@
+pydb.py is the main file.
+you can execute it to create a db file.
+
+yummy.db is the db file just got created
+
+For now in db,
+we have two users and one recipe
+
+In pydb.py,
+it created three users
+and
+it updated one user where UserID = 0
+and
+it deleted one user where UserID = 2
+
