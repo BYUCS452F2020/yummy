@@ -19,3 +19,11 @@ def create_table():
     c.execute('')
     c.commit()
     c.close()
+
+def add_user(username, password, email):
+
+    c = create_connection('yummy.db')
+
+    c.execute('')
+    c.commit()
+    c.close()

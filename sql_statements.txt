@@ -1,5 +1,5 @@
 CREATE TABLE Recipe (
-	RecipeID int NOT NULL,
+	RecipeID int NOT NULL UNIQUE AUTO_INCREMENT,
 	AuthorID int NOT NULL,
 	Name varchar(255) NOT NULL,
 	Duration varchar(255),
@@ -21,10 +21,27 @@ CREATE TABLE Ingredient (
 	FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID)	
 )
 
-CREATE TABLE User (
-	UserID int NOT NULL,
-	Username varchar(255),
-	Password varchar(255),
-	Email varchar(255),
-	PRIMARY KEY (RecipeID)
+CREATE TABLE Procedure (
+	RecipeID int NOT NULL,
+	Procedure int NOT NULL,
+	Description varchar(255),
+	PRIMARY KEY (RecipeID, Procecure),
+	FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID)
 )
+
+CREATE TABLE User (
+	UserID int NOT NULL UNIQUE AUTO_INCREMENT,
+	Username varchar(255) NOT NULL,
+	Password varchar(255) NOT NULL,
+	Email varchar(255),
+	PRIMARY KEY (UserID)
+)
+
+CREATE TABLE Flavorite (
+	UserID int NOT NULL,
+	RecipeID int NOT NULL,
+	PRIMARY KEY (UserID, RecipeID),
+	FOREIGN KEY (UserID) REFERENCES User(UserID),
+	FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID)
+)
+
