@@ -12,3 +12,11 @@ CREATE TABLE Recipe (
 	FOREIGN KEY (AuthorID) REFERENCES User(UserID),
 	CHECK (Difficulty BETWEEN 1 AND 5)
 )
+
+CREATE TABLE Ingredient (
+	RecipeID int NOT NULL,
+	Name varchar(255) NOT NULL,
+	Amount varchar(255),
+	PRIMARY KEY (RecipeID, Name),
+	FOREIGN KEY (RecipeID) REFERENCES Recipe(RecipeID)	
+)
