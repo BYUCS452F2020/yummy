@@ -64,7 +64,9 @@ def main():
                                 Email varchar(255),
                                 PRIMARY KEY (UserID)
                             );"""
-                                
+
+    user_1 = (0, 'test1', 'password', 'email@gmail.com')
+
 
     # create a database connection
     conn = create_connection(database)

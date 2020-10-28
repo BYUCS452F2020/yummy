@@ -19,3 +19,14 @@ def create_table():
     c.execute('')
     c.commit()
     c.close()
+
+def add_ingredient(conn, user):
+    sql = ''' INSERT INTO Ingredient(RecipeID,Name,Amount,Email)
+              VALUES(?,?,?,?,?,?) '''
+
+    cur = conn.cursor()
+    cur.execute(sql, user)
+    conn.commit()
+
+    return cur.lastrowid
+    

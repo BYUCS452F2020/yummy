@@ -20,8 +20,15 @@ def create_table():
     c.commit()
     c.close()
 
-def add_recipe():
-    pass
+def add_recipe(conn, user):
+    sql = ''' INSERT INTO Recipe(UserID,Username,Password,Email)
+              VALUES(?,?,?,?,?,?) '''
+
+    cur = conn.cursor()
+    cur.execute(sql, user)
+    conn.commit()
+
+    return cur.lastrowid
 
 def delete_recipe():
     pass
