@@ -1,39 +1,10 @@
 import sqlite3
 from sqlite3 import Error
-
-
-def create_connection(db_file):
-    """ create a database connection to the SQLite database
-        specified by db_file
-    :param db_file: database file
-    :return: Connection object or None
-    """
-    conn = None
-    try:
-        conn = sqlite3.connect(db_file)
-        return conn
-    except Error as e:
-        print(e)
-
-    return conn
-
-
-def create_table(conn, create_table_sql):
-    """ create a table from the create_table_sql statement
-    :param conn: Connection object
-    :param create_table_sql: a CREATE TABLE statement
-    :return:
-    """
-    try:
-        c = conn.cursor()
-        c.execute(create_table_sql)
-    except Error as e:
-        print(e)
-
+from dao import user
+from dao import recipe
+from dao import ingredient
 
 def main():
-    database = r"\yummy.db"
-
     sql_create_Recipe_table = """CREATE TABLE IF NOT EXISTS Recipe (
                                     RecipeID int NOT NULL,
                                     AuthorID int NOT NULL,
@@ -65,25 +36,40 @@ def main():
                                 PRIMARY KEY (UserID)
                             );"""
 
+    ### create tables ###
+    # create Recipe table
+    recipe.create_table(sql_create_Recipe_table)
+
+    # create Ingredient table
+    ingredient.create_table(sql_create_Ingredient_table)
+
+    # create User table
+    user.create_table(sql_create_User_table)
+
+    ### add data ###
+    # add users
     user_1 = (0, 'test1', 'password', 'email@gmail.com')
+    user_2 = (1, 'test2', 'password', 'email@gmail.com')
+    user_3 = (2, 'test3', 'password', 'email@gmail.com')
 
+    user.add_user(user_1)
+    user.add_user(user_2)
+    user.add_user(user_3)
 
-    # create a database connection
-    conn = create_connection(database)
+    # add recipe
+    recipe_1 = (0, 0, 'recipe1', '160', 'blob', 1, 'party', 'Korea', 'step1, step2')
 
-    # create tables
-    if conn is not None:
-        # create Recipe table
-        create_table(conn, sql_create_Recipe_table)
+    recipe.add_recipe(recipe_1)
 
-        # create Ingredient table
-        create_table(conn, sql_create_Ingredient_table)
+    ### edit data ###
+    # edit user
+    user_1_edit = ('newtest1', 'newemail@gmail.com', 0)
 
-        # create User table
-        create_table(conn, sql_create_User_table)
+    user.update_user(user_1_edit)
 
-    else:
-        print("Error! cannot create the database connection.")
+    ### delete data ###
+    # delete user
+    user.delete_user(2)
 
 
 if __name__ == '__main__':
