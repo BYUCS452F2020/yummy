@@ -12,10 +12,23 @@ def create_connection(path):
 
     return connection
 
-def create_table():
+def create_table(sql):
 
     c = create_connection('yummy.db')
 
-    c.execute('')
+    c.execute(sql)
     c.commit()
     c.close()
+
+def add_ingredient(ingredient):
+    c = create_connection('yummy.db')
+
+    print('add_ingredient')
+
+    sql = ''' INSERT INTO Ingredient(RecipeID,Name,Amount)
+              VALUES(?,?,?) '''
+
+    c.execute(sql, ingredient)
+    c.commit()
+    c.close()
+    

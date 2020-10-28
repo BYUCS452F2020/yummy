@@ -12,16 +12,26 @@ def create_connection(path):
 
     return connection
 
-def create_table():
+def create_table(sql):
 
     c = create_connection('yummy.db')
 
     c.execute()
+    c.execute(sql)
     c.commit()
     c.close()
 
-def add_recipe():
-    pass
+def add_recipe(recipe):
+    c = create_connection('yummy.db')
+
+    print('add_recipe')
+
+    sql = ''' INSERT INTO Recipe(RecipeID,AuthorID,Name,Duration,Picture,Difficulty,Style,Country,Course)
+              VALUES(?,?,?,?,?,?,?,?,?) '''
+
+    c.execute(sql, recipe)
+    c.commit()
+    c.close()
 
 def delete_recipe():
     pass

@@ -12,18 +12,47 @@ def create_connection(path):
 
     return connection
 
-def create_table():
+def create_table(sql):
 
     c = create_connection('yummy.db')
 
-    c.execute('')
+    c.execute(sql)
     c.commit()
     c.close()
 
-def add_user(username, password, email):
-
+def add_user(user):
     c = create_connection('yummy.db')
 
-    c.execute('')
+    print('add_user')
+
+    sql = ''' INSERT INTO User(UserID,Username,Password,Email)
+              VALUES(?,?,?,?) '''
+
+    c.execute(sql, user)
+    c.commit()
+    c.close()
+
+def update_user(user):
+    c = create_connection('yummy.db')
+
+    print('update_user')
+
+    sql = ''' UPDATE User
+                SET Username = ?,
+                    Email = ?
+                WHERE UserID = ?'''
+
+    c.execute(sql, user)
+    c.commit()
+    c.close()
+
+def delete_user(UserID):
+    c = create_connection('yummy.db')
+
+    print('delete_user')
+
+    sql = ''' DELETE FROM User WHERE UserID = ? '''
+
+    c.execute(sql, (UserID,))
     c.commit()
     c.close()
