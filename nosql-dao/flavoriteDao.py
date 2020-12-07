@@ -12,7 +12,7 @@ class FlavoriteDao:
     def add_flavorite(self, userId, recipeId):
         try:
             r = redis.Redis(host=self.host, port=self.port, db=self.db)
-            r.rpush(userId, recipeId)
+            r.rpush(f"flavorite:{userId}", recipeId)
         except Exception as e:
             print(e)
             raise e
@@ -20,8 +20,7 @@ class FlavoriteDao:
     def find_flavorite_by_userId(self, userId):
         try:
             r = redis.Redis(host=self.host, port=self.port, db=self.db)
-            len = r.llen(userId)
-            flavorite = r.lrange(userId, 0, len-1)
+            flavorite = r.get(f"flavorite:{userId}")
             return flavorite
         except Exception as e:
             print(e)
@@ -30,7 +29,7 @@ class FlavoriteDao:
     def delete_flavorite(self, userId, recipeId):
         try:
             r = redis.Redis(host=self.host, port=self.port, db=self.db)
-            r.lrem(userId, 1, recipeId)
+            r.lrem(f"flavorite:{userId}", 1, recipeId)
         except Exception as e:
             print(e)
             raise e
