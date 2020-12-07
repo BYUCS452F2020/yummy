@@ -1,5 +1,4 @@
 import redis
-from model.user import User
 
 
 class FlavoriteDao:
@@ -22,8 +21,8 @@ class FlavoriteDao:
         try:
             r = redis.Redis(host=self.host, port=self.port, db=self.db)
             len = r.llen(userId)
-            user = r.lrange(userId, 0, len-1)
-            return user
+            flavorite = r.lrange(userId, 0, len-1)
+            return flavorite
         except Exception as e:
             print(e)
             raise e
